@@ -50,6 +50,7 @@ export default function EditBook({book, setEditionMode, setCurrentBook}) {
 
   return (
     <>
+      <Text style={styles.tituloModal}>Editar libro</Text>
       {updated ? (
         <View style={styles.success}>
           <Text style={styles.successMsg}>Libro actualizado!</Text>
@@ -195,7 +196,12 @@ export default function EditBook({book, setEditionMode, setCurrentBook}) {
             )}
             name="genero"
           />
-          <Pressable style={styles.modalBtn} onPress={handleSubmit(submitForm)}>
+          <Pressable onPress={handleSubmit(submitForm)}
+          style={({pressed})=> [
+              styles.modalBtn,
+              pressed && {opacity: .7}
+          ]}
+          >
             <Text style={styles.btnTxt}>Actualizar</Text>
           </Pressable>
         </View>
@@ -205,6 +211,10 @@ export default function EditBook({book, setEditionMode, setCurrentBook}) {
 }
 
 const styles = StyleSheet.create({
+  tituloModal: {
+    fontSize: 25,
+    marginBottom:10
+  },
   input: {
     borderWidth: 1,
     borderColor: 'black',

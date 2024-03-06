@@ -12,17 +12,22 @@ import {useForm, Controller} from 'react-hook-form';
 import axios from 'axios';
 import {SafeAreaView} from 'react-native-safe-area-context';
 
-export default function AddBook() {
+export default function AddBook({navigation}) {
   const [created, setCreated] = useState(false);
   const {
     control,
     handleSubmit,
     formState: {errors},
+    reset
   } = useForm();
 
   useEffect(()=>{
-    setCreated(false)
-  },[])
+    const unsubscribe = navigation.addListener('focus', ()=> {
+      setCreated(false)
+    })
+    return unsubscribe
+    
+  },[navigation])
 
   const postBook = async data => {
     try {
@@ -40,6 +45,7 @@ export default function AddBook() {
     } catch (error) {
       console.log('Error handling form submit', error);
     }
+    reset()
   };
 
   return (
@@ -182,7 +188,11 @@ export default function AddBook() {
           />
           <Pressable
             onPress={handleSubmit(submitForm)}
-            style={styles.submitBtn}>
+            style={({pressed})=> [
+              styles.submitBtn,
+              pressed && {opacity: .7}
+            ]}
+          >
             <Text style={styles.btnTxt}>Añadir libro</Text>
           </Pressable>
         </ScrollView>

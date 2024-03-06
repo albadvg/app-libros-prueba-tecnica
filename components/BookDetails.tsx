@@ -37,11 +37,22 @@ export default function BookDetails({book, setEditionMode, setCurrentBook}) {
             <Text style={styles.modalInfo}>Año de publicación: {book.año}</Text>
           </View>
           <Pressable
-            style={styles.modalBtn}
-            onPress={() => setEditionMode(true)}>
+            style={({pressed})=> [
+              styles.modalBtn,
+              pressed && {opacity: .7}
+            ]}
+            onPress={() => setEditionMode(true)}
+          >
             <Text style={styles.btnTxt}>Editar</Text>
           </Pressable>
-          <Pressable style={styles.modalBtn} onPress={deleteBook}>
+
+          <Pressable 
+              style={({pressed})=> [
+                styles.modalBtn,
+                pressed && {opacity: .7}
+               ]}
+              onPress={deleteBook}
+          >
             <Text style={styles.btnTxt}>Eliminar</Text>
           </Pressable>
         </View>

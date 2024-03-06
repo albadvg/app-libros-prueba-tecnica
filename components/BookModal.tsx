@@ -14,7 +14,7 @@ export default function BookModal({setIsModalOpen, book, setCurrentBook}) {
         <Icons name="close" style={styles.closeIcon} onPress={() => setIsModalOpen(false)} />
         <ScrollView contentContainerStyle={styles.scrollContainer}>
           {editionMode 
-            ? <EditBook book={book} setEditionMode={setEditionMode}/> 
+            ? <EditBook book={book} setEditionMode={setEditionMode} setCurrentBook={setCurrentBook}/> 
             : <BookDetails book={book} setEditionMode={setEditionMode}/>}
         </ScrollView>
       </View>
